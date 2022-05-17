@@ -1,34 +1,42 @@
-let emailMap =new Map;
+var emailArray=[];
+var passwordArray=[];
+
+var loginBox = document.getElementById("login");
+var regBox = document.getElementById("register");
+var forgetBox = document.getElementById("forgot");
+
+var loginTab = document.getElementById("lt");
+var regTab = document.getElementById("rt");
 
 function regTabFun(){
     event.preventDefault();
 
-    document.getElementById("register").style.visibility="visible";
-    document.getElementById("login").style.visibility="hidden";
-    document.getElementById("forgot").style.visibility="hidden";
+    regBox.style.visibility="visible";
+    loginBox.style.visibility="hidden";
+    forgetBox.style.visibility="hidden";
 
-    document.getElementById("rt").style.backgroundColor="rgb(12, 132, 189)";
-    document.getElementById("lt").style.backgroundColor="rgba(11, 177, 224, 0.82)";
+    regTab.style.backgroundColor="rgb(12, 132, 189)";
+    loginTab.style.backgroundColor="rgba(11, 177, 224, 0.82)";
 }
 function loginTabFun(){
     event.preventDefault();
 
-    document.getElementById("register").style.visibility="hidden";
-    document.getElementById("login").style.visibility="visible";
-    document.getElementById("forgot").style.visibility="hidden";
+    regBox.style.visibility="hidden";
+    loginBox.style.visibility="visible";
+    forgetBox.style.visibility="hidden";
 
-    document.getElementById("lt").style.backgroundColor="rgb(12, 132, 189)";
-    document.getElementById("rt").style.backgroundColor="rgba(11, 177, 224, 0.82)";
+    loginTab.style.backgroundColor="rgb(12, 132, 189)";
+    regTab.style.backgroundColor="rgba(11, 177, 224, 0.82)";
 }
 function forTabFun(){
     event.preventDefault();
 
-    document.getElementById("register").style.visibility="hidden";
-    document.getElementById("login").style.visibility="hidden";
-    document.getElementById("forgot").style.visibility="visible";
+    regBox.style.visibility="hidden";
+    loginBox.style.visibility="hidden";
+    forgetBox.style.visibility="visible";
 
-    document.getElementById("rt").style.backgroundColor="rgba(11, 177, 224, 0.82)";
-    document.getElementById("lt").style.backgroundColor="rgba(11, 177, 224, 0.82)";
+    regTab.style.backgroundColor="rgba(11, 177, 224, 0.82)";
+    loginTab.style.backgroundColor="rgba(11, 177, 224, 0.82)";
 
 }
 
@@ -53,13 +61,14 @@ function register(){
         return ;
     }
     else if ( password != passwordRetype ){
-        alert("Пароли не совпадают. Попробуйте ещё раз");
+        alert("Пароли не совпадают");
         return;
     }
-    else if(emailMap.get(email) == null){
-        emailMap.set(email, password);
+    else if(emailArray.indexOf(email) == -1){
+        emailArray.push(email);
+        passwordArray.push(password);
 
-        alert(email + "  Спасибо!\nРегистрация прошла успешно");
+        alert("Регистрация прошла успешно!\nПопробуйте зайти");
 
         document.getElementById("re").value ="";
         document.getElementById("rp").value="";
@@ -67,7 +76,7 @@ function register(){
         loginTabFun();
     }
     else{
-        alert(email + " уже занят.");
+        alert(email + " уже зарегестрирован");
         return ;
     }
 }
@@ -77,17 +86,17 @@ function login(){
     var email = document.getElementById("se").value;
     var password = document.getElementById("sp").value;
 
-    var i = emailMap.get(email);
+    var i = emailArray.indexOf(email);
 
-    if(emailMap.get(email) == null){
+    if(emailArray.indexOf(email) == -1){
         if (email == ""){
             alert("Введите Email");
             return ;
         }
-        alert("Пользователь не найден");
+        alert("Email не зарегестрирован");
         return ;
     }
-    else if(emailMap.get(email) != password){
+    else if(passwordArray[i] != password){
         if (password == ""){
             alert("Введите пароль");
             return ;
@@ -96,7 +105,7 @@ function login(){
         return ;
     }
     else {
-        alert("Добро пожаловать, " + email + "!");
+        alert(email + ", добро пожаловать в чат!");
 
         document.getElementById("se").value ="";
         document.getElementById("sp").value="";
@@ -109,15 +118,15 @@ function forgot(){
 
     var email = document.getElementById("fe").value;
 
-    if(emailMap.get(email) == null){
+    if(emailArray.indexOf(email) == -1){
         if (email == ""){
             alert("Введите Email");
             return ;
         }
-        alert("Пользователь не найден");
+        alert("Email не зарегестрирован");
         return ;
     }
 
-    alert("Ваш пароль: " + emailMap.get(email));
+    alert("Ваш пароль: " + passwordArray[emailArray.indexOf(email)]);
     document.getElementById("fe").value ="";
 }
