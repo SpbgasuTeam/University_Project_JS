@@ -1,5 +1,8 @@
 var emailArray=[];
 var passwordArray=[];
+var nameArray=[];
+var surnameArray=[];
+var patronymicArray=[];
 
 var loginBox = document.getElementById("login");
 var regBox = document.getElementById("register");
@@ -47,37 +50,54 @@ function register(){
     var email = document.getElementById("re").value;
     var password = document.getElementById("rp").value;
     var passwordRetype = document.getElementById("rrp").value;
+    var name = document.getElementById("name").value;
+    var surname = document.getElementById("surname").value;
+    var patronymic = document.getElementById("patronymic").value;
 
-    if (email == ""){
-        alert("Введите Email");
+    if(emailArray.indexOf(email) != -1){
+        alert(email + " уже зарегестрирован");
         return ;
     }
-    else if (password == ""){
-        alert("Введите пароль");
-        return ;
-    }
-    else if (passwordRetype == ""){
-        alert("Повторите пароль");
-        return ;
-    }
-    else if ( password != passwordRetype ){
-        alert("Пароли не совпадают");
-        return;
-    }
-    else if(emailArray.indexOf(email) == -1){
+    else{
+        if (name == ""){
+            alert("Введите Имя");
+            return ;
+        }
+        else if (surname == ""){
+            alert("Введите Фамилию");
+            return ;
+        }
+        else if (email == ""){
+            alert("Введите Email");
+            return ;
+        }
+        else if (password == ""){
+            alert("Введите пароль");
+            return ;
+        }
+        else if (passwordRetype == ""){
+            alert("Повторите пароль");
+            return ;
+        }
+        else if ( password != passwordRetype ){
+            alert("Пароли не совпадают");
+            return;
+        }
         emailArray.push(email);
         passwordArray.push(password);
+        nameArray.push(name);
+        surnameArray.push(surname);
+        patronymicArray.push(patronymic);
 
         alert("Регистрация прошла успешно!\nПопробуйте зайти");
 
         document.getElementById("re").value ="";
         document.getElementById("rp").value="";
         document.getElementById("rrp").value="";
+        document.getElementById("name").value="";
+        document.getElementById("surname").value="";
+        document.getElementById("patronymic").value="";
         loginTabFun();
-    }
-    else{
-        alert(email + " уже зарегестрирован");
-        return ;
     }
 }
 function login(){

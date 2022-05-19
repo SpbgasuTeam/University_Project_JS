@@ -1,20 +1,19 @@
-{
+*{
     padding: 0;
     margin: 0;
     box-size:border-box;
 
 }
 body { /*фон*/
-
     background: rgba(33, 65, 229, 0.4);
     -webkit-background-size: cover;
     background-size:cover ;
     background-attachment: fixed;
     font-family: sans-serif;
-    
 }
 #container {
     width: 300px;
+    height: 270px;
     margin: 0 auto;
     margin-top: 150px;
     padding: 0;
@@ -22,66 +21,69 @@ body { /*фон*/
     color: #fff;
     font-size: 10px;
     text-transform: uppercase;
-
-
-
+    outline: 1px solid rgba(2, 11, 14, 0.82);
+    background-color: rgba(11, 177, 224, 0.82);
 }
 .tabs {/* вход/регистр*/
     display: table-cell ;
     width: 39%;
     background-color: rgba(11, 177, 224, 0.82);
-
+    outline: 1px solid rgba(2, 11, 14, 0.82);
+    transition: 0.5s;
+    transition-delay: 0.2s;
+    color: #ffffff;
     padding: 29px;
     float: bottom;
     text-align: center;
     vertical-align: center;
-    border: 1px solid #ffffff;
     font-size: 1em;
-    color: #ffffff;
-    transition: 0.5s;
-    transition-delay: 0.2s;
-
 }
-
-
 .tabs:hover, p{
     cursor: pointer;
 }
-
 #lt {/* кнопка входа*/
     transition: 0.5s;
 }
-#cont { /* тело входа*/
-    width: 100%;
-    height: 300px;
+#register{
+    height: 350px;
     background-color: rgba(11, 177, 224, 0.82);
-    border: 1px solid #ffffff;
-
+    width: 300px;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+    outline: 1px solid rgba(2, 11, 14, 0.82);
 }
-
+#forgot{
+    width: 300px;
+    height: 220px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+    outline: 1px solid rgba(2, 11, 14, 0.82);
+    background-color: rgba(11, 177, 224, 0.82);
+}
 input{ /*импуты*/
     display: block;
     width: 250px;
     margin: 10px 13px;
     padding: 10px;
-    font-size: 1.2em;
-
-    outline: 1px solid #ffffff;
-
-
-
+    font-size: 11px;
+    outline: 1px solid rgba(2, 11, 14, 0.82);
+    border-radius: 20px/20px;
+    border: none;
 }
-
 input[type="submit"] {
     width: 272px;
     color: #6e6e6e;
 }
-
-
 #clear {
     clear: both;
 }
-
 .comm {
     position: absolute;
     visibility: hidden;
@@ -89,36 +91,27 @@ input[type="submit"] {
 #login {
     visibility: visible;
 }
-
 h3 { /*текст на контейнере */
     display: table-cell;
     vertical-align: central;
     padding: 10px 15px;
     font-size: 1.5em;
     color: #ffffff;
-
+text-transform: uppercase;
 }
-
 #forgot h3 {
     display: block;
-    margin-top: 40px;
+    margin-top: 60px;
     text-align: center;
 }
-
 #forgot div {
     margin-top: 30px;
 }
-
 wpas {
     padding: 10px 15px;
     font-size: 1.3em;
     color: #ffffff;
-
 }
-
-
-
-
 .comm input[type="submit"]{
     margin-top: 20px;
     color:#fff;
@@ -126,8 +119,6 @@ wpas {
     text-transform: uppercase;
     border: none;
     background:#000;
-    transition: 0.5s;
-
 }
 .comm input[type="submit"]:hover{
     background: darkorchid;

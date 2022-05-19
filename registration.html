@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>Чат</title>
+    <title>Вход/Регистрация</title>
     <link rel="stylesheet" href="form_to_web(remov).css">
 
 </head>
@@ -19,26 +19,28 @@
         <div id="login" class="comm">
             <h3>Вход</h3>
 
-            <input id="se" type="email" placeholder="Email" required/>
-            <input id="sp" type="password" placeholder="Password" required/>
-            <input type="submit" onclick="login()" value="Submit"/>
+            <input id="se" type="email" required placeholder="Email" required/>
+            <input id="sp" type="password" required placeholder="Password" required/>
+            <input type="submit" onclick="login()" value="Войти"/>
 
             <p onclick="forTabFun()">Забыл пароль?</p>
         </div>
         <div id="register" class="comm">
             <h3>Регистрация</h3>
-
-            <input id="re" type="email" placeholder="Email" required/>
+            <input id="name" type="text" required placeholder="Имя" required/>
+            <input id="surname" type="text" required placeholder="Фамилия" required/>
+            <input id="patronymic" type="text" placeholder="Отчество" required/>
+            <input id="re" type="email"required  placeholder="Email" required/>
             <input id="rp" type="password" placeholder="Пароль" required/>
             <input id="rrp" type="password" placeholder="Повторите пароль" required/>
-            <input type="submit" onclick="register()" value="Submit"/>
+            <input type="submit" onclick="register()" value="Зарегистрироваться"/>
 
         </div >
         <div id="forgot" class="comm">
             <h3>Восстановление пароля</h3>
             <div>
                 <input id="fe" type="email" placeholder="Email" required/>
-                <input type="submit" onclick="forgot()" value="Submit"/>
+                <input type="submit" onclick="forgot()" value="Восстановить"/>
             </div>
         </div>
     </div>
