@@ -1,4 +1,4 @@
-const request = (type, path, data, fun) => {
+/*const request = (type, path, data, fun) => {
     const xhr = new XMLHttpRequest();
     xhr.responseType = "json";
 
@@ -17,9 +17,9 @@ const request = (type, path, data, fun) => {
         alert(`Ошибка соединения`);
     };
     xhr.send(JSON.stringify(data));
-}
-const login = (id,password) =>{
+}*/
+/*const login = (id,password) =>{
     localStorage.setItem("id", id);
     localStorage.setItem("password", password);
     document.location.href = "chat.html";
-}
+}*/

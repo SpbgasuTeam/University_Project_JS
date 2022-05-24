@@ -93,61 +93,9 @@ function forgot(){
         if (response === "BAD_ID") {
             alert('This ID not found');
         }else{
-            alert(response);
-           // alert("Ваш пароль: " + response.toString());
+            //alert(response);
+            alert("Ваш пароль: " + response.toString());
         }
     })
 
 }
-
-/*function login(){
-    event.preventDefault();
-
-    var email = document.getElementById("se").value;
-    var password = document.getElementById("sp").value;
-
-    var i = emailArray.indexOf(email);
-
-    if(emailArray.indexOf(email) == -1){
-        if (email == ""){
-            alert("Введите Email");
-            return ;
-        }
-        alert("Email не зарегестрирован");
-        return ;
-    }
-    else if(passwordArray[i] != password){
-        if (password == ""){
-            alert("Введите пароль");
-            return ;
-        }
-        alert("Неверный пароль");
-        return ;
-    }
-    else {
-        alert(email + ", добро пожаловать в чат!");
-
-        document.getElementById("se").value ="";
-        document.getElementById("sp").value="";
-        return ;
-    }
-
-}*/
-/*
-function forgot(){
-    event.preventDefault();
-
-    var email = document.getElementById("fe").value;
-
-    if(emailArray.indexOf(email) == -1){
-        if (email == ""){
-            alert("Введите Email");
-            return ;
-        }
-        alert("Email не зарегестрирован");
-        return ;
-    }
-
-    alert("Ваш пароль: " + passwordArray[emailArray.indexOf(email)]);
-    document.getElementById("fe").value ="";
-}*/

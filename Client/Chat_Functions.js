@@ -1,12 +1,16 @@
+const add_contact = document.getElementById("add_contact");
+const send_btn = document.getElementById("send_btn");
+
+
 const request = (type, path, data, fun) => {
     const xhr = new XMLHttpRequest();
     xhr.responseType = "json";
 
-    xhr.open(type, `https://localhost:80/${path}`);
+    xhr.open(type, `http://localhost:80/${path}`);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.onload = () => {
-        if(xhr.status !== 200){
+        if (xhr.status !== 200) {
             return;
         }
         const response = xhr.response;
@@ -14,19 +18,23 @@ const request = (type, path, data, fun) => {
     };
 
     xhr.onerror = () => {
-        alert("Ошибка соединения");
+        alert(`Ошибка соединения`);
     };
     xhr.send(JSON.stringify(data));
 }
+const login = (id,password) =>{
+    localStorage.setItem("id", id);
+    localStorage.setItem("password", password);
+    document.location.href = "chat.html";
+}
 
 
-const send_btn = document.getElementById("send_btn");
 send_btn.addEventListener("click", ()=>{
     const date = new Date();
     const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
-    const ID_Sender = "ID_Sender";
-    const ID_Getter = "ID_Getter";
-    const Text = "sdfghjklertyuio";
+    const ID_Sender = "1";
+    const ID_Getter = "2";
+    const Text = "HI";
 
     const chat_ul = document.getElementById("chat_ul");
     const li = document.createElement("li");
@@ -35,6 +43,7 @@ send_btn.addEventListener("click", ()=>{
     const conttext = document.createElement("div");
     const contname = document.createElement("div");
     const conthead = document.createElement("div");
+
     contdate.textContent = msgtime;
     conttext.textContent = Text;
     contname.textContent = ID_Sender;
@@ -51,47 +60,55 @@ send_btn.addEventListener("click", ()=>{
     msg.appendChild(conttext);
     li.appendChild(msg);
     chat_ul.appendChild(li);
+    let Time = msgtime;
 
-    /*request("POST", "New_MSG", {ID_Sender, ID_Getter, Text, msgtime}, (response) => {
+    request("POST", "New_MSG", {ID_Sender, ID_Getter, Text, Time}, (response) => {
         alert(response);
-    });*/
+    });
 })
-
 document.querySelectorAll('.a_friend').forEach(item => {
     item.addEventListener('click', event => {
-        alert("клик");
+        //alert("клик");
         const ID_Sender = "1";
         const ID_Getter = "2";
-        request("GET", "add_friend", {ID_Sender, ID_Getter}, (response) => {
-            //функция для вывода сообщений на вебморду
-            alert(response);
+        request("POST", "Read", {ID_Sender, ID_Getter}, (response) => {
+            //функция для вывода сообщений на веб
+            if(response == 'Save') {
+                alert('MSG SEND!');
+            }else{
+                alert('Error!');
+            }
         });
     });
 })
-
-
-const add_contact = document.getElementById("add_contact");
 add_contact.addEventListener("click", ()=>{
-    const ID_Getter = "ID_Getter";
+    const ID_Getter = "5454";
+    const ID_Sender = "1";
 
-    /*request("POST", "New_MSG", {ID_Sender, ID_Getter, Text, msgtime}, (response) => {
-        alert(response);
-    });*/
+    request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
+        if(response == 'Wrong_ID'){
+            alert('Wrong_ID')
+        }else{
+            alert('Done!')
 
-    const list_chats = document.getElementById("list_chats");
-    const li = document.createElement("li");
-    const a_friend = document.createElement("div");
-    const head_portrait = document.createElement("div");
-    const head_text = document.createElement("div");
-    head_text.textContent = ID_Getter;
+            const list_chats = document.getElementById("list_chats");
+            const li = document.createElement("li");
+            const a_friend = document.createElement("div");
+            const head_portrait = document.createElement("div");
+            const head_text = document.createElement("div");
+            head_text.textContent = ID_Getter;
 
-    head_text.classList.add("head_text");
-    head_portrait.classList.add("head_portrait");
-    a_friend.classList.add("a_friend");
+            head_text.classList.add("head_text");
+            head_portrait.classList.add("head_portrait");
+            a_friend.classList.add("a_friend");
 
-    head_portrait.appendChild(head_text);
-    a_friend.appendChild(head_portrait);
-    li.appendChild(a_friend);
-    list_chats.appendChild(li);
+            head_portrait.appendChild(head_text);
+            a_friend.appendChild(head_portrait);
+            li.appendChild(a_friend);
+            list_chats.appendChild(li);
+        }
+    });
+
+
 
 })

@@ -24,7 +24,6 @@ function Create_Dialog(Users){
         if(err) console.log('Error');
     });
 }
-
 app.post("/Register", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -76,7 +75,6 @@ app.post("/New_MSG", (req, res) => {
             if(err) console.log('Error');
         });
 
-        //console.log(data);
         res.send(JSON.stringify('Save'));
     })
 })
@@ -116,7 +114,7 @@ app.post("/New_Dialog", (req, res) => {
             Create_Dialog(buf);
             res.send(JSON.stringify("GOOD"))
         } else {
-            alert("Wrong ID!")
+            //alert("Wrong ID!")
             res.send(JSON.stringify("Wrong_ID!"));
         }
 
@@ -131,7 +129,6 @@ app.post("/Read", (req, res) => {
             "Text":"",
             "Time":""
         }];
-         //let buf =[{ }]
         data.forEach(element => {
             if ((body.ID_Sender == element.ID[0] && body.ID_Getter == element.ID[1]) || (body.ID_Sender == element.ID[1] && body.ID_Getter == element.ID[0])) {
                 buf = element.All_Msg;
@@ -142,7 +139,6 @@ app.post("/Read", (req, res) => {
 })
 app.post("/Forgot", (req, res) => {
     req.on('data', requestBody => {
-
         const body = JSON.parse(requestBody.toString());
         const data = JSON.parse(fs.readFileSync("Server/DT_users.json", "utf-8"));
         let check=0;
@@ -156,25 +152,4 @@ app.post("/Forgot", (req, res) => {
 
     })
 })
-
-
-/*app.delete("/del_message", (req, res) => {
-    req.on('data', requestBody => {
-        const body = JSON.parse(requestBody.toString());
-
-        const data = JSON.parse(fs.readFileSync(`${body.id}.json`, "utf-8"));
-        const newData = data.filter(e => e.ui !== body.ui)
-        console.log(newData);
-        fs.writeFileSync(`${body.id}.json`, JSON.stringify(newData));
-        res.send();
-    })
-})
-app.delete("/delete_all", (req, res) => {
-    req.on('data', requestBody => {
-        const body = JSON.parse(requestBody.toString());
-        fs.writeFileSync(`${body.id}.json`, JSON.stringify([]));
-        res.send();
-    })
-})*/
-
 app.listen(80)
