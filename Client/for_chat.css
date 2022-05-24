@@ -38,7 +38,7 @@ width: 999px;
 }
 
 .chat_online {
-    overflow: hidden;
+    overflow: auto;
     float: left;
     height: 546px;
     width: 200px;
@@ -65,10 +65,6 @@ width: 999px;
 .online_friend ul li {
 
     list-style-type: none;
-}
-
-.online_friend ul li {
-
     height: 60px;
     border-bottom: 1px solid #1c1f21;
     margin-top: 10px;
@@ -79,7 +75,6 @@ width: 999px;
     border: 1px solid rgba(2, 11, 14, 0.82);
     height: 60px;
     background-color: rgba(189, 5, 241, 0.56);
-
 
 }
 
@@ -186,7 +181,7 @@ width: 999px;
 .chat_content{
     overflow: auto;
     width: 540px;
-height: 470px;
+    height: 470px;
 }
 .chat_content li{
     margin-top: 10px;
@@ -252,4 +247,55 @@ height: 470px;
 .settings input[type="button"]:active {
     transition: 50ms;
     background-color: rgb(241, 49, 255);
+}
+
+.search_online input[type="button"] {
+    border-radius: 10%;
+    width: 150px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    margin: 5px;
+}
+.search_online input[type="button"]:hover {
+    background-color: rgba(152, 117, 255, 0.85);
+}
+
+.search_online input[type="button"]:active {
+    transition: 50ms;
+    background-color: rgb(241, 49, 255);
+}
+
+.msg {
+    display: flex;
+    flex-direction: column;
+    float: none;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: white;
+    margin: 20px;
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    float: left;
+    padding: 5px;
+}
+
+.date {
+    float: left;
+    color: #6600aa;
+    padding: 5px;
+}
+.name {
+    float: left;
+    color: rgba(227, 0, 33, 0.41);
+    padding: 5px;
+}
+.text {
+    font-size: 18px;
+    float: none;
+    background-color: white;
+    padding: 5px;
 }

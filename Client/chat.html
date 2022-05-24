@@ -28,11 +28,11 @@
                 <! - Поиск ->
                 <div class="search_online">
                     <form>
-                        <input type = "text" placeholder = "поиск контактов">
+                        <input type = "button" value = "Добавить контакт" id = "add_contact">
                     </form>
                 </div>
                 <div class="online_friend">
-                    <ul>
+                    <ul id="list_chats">
                         <li>
                             <div class="a_friend">
                                 <div class="head_portrait">
@@ -40,10 +40,17 @@
                                         Александр
                                     </div>
                                 </div>
-
                             </div>
                         </li>
-
+                        <li>
+                            <div class="a_friend">
+                                <div class="head_portrait">
+                                    <div class="head_text">
+                                        Мария
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
@@ -73,4 +80,5 @@
     </div>
 </div>
 </body>
+<script src="Chat_Functions.js"></script>
 </html>
