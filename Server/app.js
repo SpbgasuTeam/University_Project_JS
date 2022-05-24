@@ -3,8 +3,6 @@ import express from 'express'
 import cors from 'cors';
 import {v4 as uuidv4} from 'uuid';
 import * as fs from "fs";
-
-
 const app = express();
 app.use(cors());
 
@@ -25,7 +23,6 @@ app.post("/login", (req, res) => {
         }
     })
 })
-
 function Add_json_DT(New_Json){
 
     var Data_B = fs.readFileSync('Server/DT_users.json','utf8');
@@ -37,7 +34,6 @@ function Add_json_DT(New_Json){
         if(err) console.log('Error');
     });
 }
-
 app.post("/Register", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -61,7 +57,6 @@ app.post("/Register", (req, res) => {
         }
     })
 });
-
 app.put("/new_message", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -80,7 +75,6 @@ app.put("/new_message", (req, res) => {
         }
     })
 })
-
 app.post("/messages", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -91,7 +85,6 @@ app.post("/messages", (req, res) => {
         res.send(JSON.stringify(data));
     })
 })
-
 app.post("/read", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -105,7 +98,6 @@ app.post("/read", (req, res) => {
         res.send();
     })
 })
-
 app.delete("/del_message", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -117,7 +109,6 @@ app.delete("/del_message", (req, res) => {
         res.send();
     })
 })
-
 app.delete("/delete_all", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -125,5 +116,4 @@ app.delete("/delete_all", (req, res) => {
         res.send();
     })
 })
-
 app.listen(80)
