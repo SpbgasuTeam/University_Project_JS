@@ -86,7 +86,19 @@ function login_In(){
         }
     })
 }
+function forgot(){
+    var ID = document.getElementById("fe").value;
 
+    request("POST", "Forgot", {ID}, (response) => {
+        if (response === "BAD_ID") {
+            alert('This ID not found');
+        }else{
+            alert(response);
+           // alert("Ваш пароль: " + response.toString());
+        }
+    })
+
+}
 
 /*function login(){
     event.preventDefault();

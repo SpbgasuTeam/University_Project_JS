@@ -140,6 +140,22 @@ app.post("/Read", (req, res) => {
         res.send(buf);
     })
 })
+app.post("/Forgot", (req, res) => {
+    req.on('data', requestBody => {
+
+        const body = JSON.parse(requestBody.toString());
+        const data = JSON.parse(fs.readFileSync("Server/DT_users.json", "utf-8"));
+        let check=0;
+        data.forEach(element => {
+            if (body.ID==element.ID) {
+                res.send(element.Password);
+                check=1;
+            }
+        })
+        if( check==0 ){res.send('BAD_ID');}
+
+    })
+})
 
 
 /*app.delete("/del_message", (req, res) => {
