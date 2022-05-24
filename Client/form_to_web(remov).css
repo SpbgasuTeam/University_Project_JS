@@ -1,11 +1,5 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-size:border-box;
+body {
 
-}
-body { /*фон*/
-    background: rgba(33, 65, 229, 0.4);
     -webkit-background-size: cover;
     background-size:cover ;
     background-attachment: fixed;
@@ -13,21 +7,16 @@ body { /*фон*/
 }
 #container {
     width: 300px;
-    height: 270px;
     margin: 0 auto;
-    margin-top: 150px;
-    padding: 0;
+    margin-top: -850px;
     text-align: center;
-    color: #fff;
     font-size: 10px;
     text-transform: uppercase;
-    outline: 1px solid rgba(2, 11, 14, 0.82);
-    background-color: rgba(11, 177, 224, 0.82);
 }
 .tabs {/* вход/регистр*/
     display: table-cell ;
     width: 39%;
-    background-color: rgba(11, 177, 224, 0.82);
+    background:linear-gradient(to bottom, rgba(9, 216, 237, 0.99), #d659fa);
     outline: 1px solid rgba(2, 11, 14, 0.82);
     transition: 0.5s;
     transition-delay: 0.2s;
@@ -35,45 +24,52 @@ body { /*фон*/
     padding: 29px;
     float: bottom;
     text-align: center;
-    vertical-align: center;
-    font-size: 1em;
+    vertical-align: middle;
+    font-size: 1.3em;
+    position: relative;
 }
 .tabs:hover, p{
     cursor: pointer;
 }
-#lt {/* кнопка входа*/
-    transition: 0.5s;
-}
-#register{
-    height: 350px;
-    background-color: rgba(11, 177, 224, 0.82);
-    width: 300px;
-    padding: 0;
-    text-align: center;
+#lt {
+    width: 60%;
+    padding: 40px;
     color: #fff;
-    font-size: 10px;
-    text-transform: uppercase;
-    outline: 1px solid rgba(2, 11, 14, 0.82);
-}
-#forgot{
-    width: 300px;
-    height: 220px;
-    margin: 0 auto;
-    padding: 0;
+    border: 1px solid #000;
     text-align: center;
-    color: #fff;
-    font-size: 10px;
-    text-transform: uppercase;
-    outline: 1px solid rgba(2, 11, 14, 0.82);
-    background-color: rgba(11, 177, 224, 0.82);
 }
-input{ /*импуты*/
+#lt:hover{
+    background:linear-gradient(to bottom, rgba(184, 61, 245, 0.99), #f5088e);
+    color: #000;
+}
+#lt:active {
+    color: #000;
+}
+#rt{
+    width: 20%;
+    padding: 30px;
+}
+#rt:hover{
+    color: #000;
+    background:linear-gradient(to bottom, rgba(63, 171, 85, 0.99), #e51383);
+}
+#rt:active {
+    color: #000;
+}
+#cont {
+    width: 100%;
+    height: 250px;
+    background-color: rgba(11, 177, 224, 0.82);
+    border: 1px solid #000000;
+}
+input {
     display: block;
     width: 250px;
     margin: 10px 13px;
     padding: 10px;
     font-size: 11px;
     outline: 1px solid rgba(2, 11, 14, 0.82);
+    color: #000000;
     border-radius: 20px/20px;
     border: none;
 }
@@ -91,13 +87,13 @@ input[type="submit"] {
 #login {
     visibility: visible;
 }
-h3 { /*текст на контейнере */
+h3 {
     display: table-cell;
     vertical-align: central;
     padding: 10px 15px;
     font-size: 1.5em;
     color: #ffffff;
-text-transform: uppercase;
+    text-transform: uppercase;
 }
 #forgot h3 {
     display: block;
@@ -107,7 +103,7 @@ text-transform: uppercase;
 #forgot div {
     margin-top: 30px;
 }
-wpas {
+p {
     padding: 10px 15px;
     font-size: 1.3em;
     color: #ffffff;
@@ -122,4 +118,25 @@ wpas {
 }
 .comm input[type="submit"]:hover{
     background: darkorchid;
+}
+#forgot{
+    width: 300px;
+    height: 100px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+}
+input[type="submit"] {
+    width: 272px;
+    color: #6e6e6e;
+}
+.video{
+
+    margin-left:-10px;
+    margin-top:20px;
+}
+.video_media{
+margin-left:-10px;
+    margin-top:-20px;
 }
