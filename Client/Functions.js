@@ -22,7 +22,4 @@ const login = (id,password) =>{
     localStorage.setItem("id", id);
     localStorage.setItem("password", password);
     document.location.href = "chat.html";
-    /*document.getElementById("registration").classList.add("hidden");
-    document.getElementById("authorisation").classList.add("hidden");
-    document.getElementById("page").classList.remove("hidden");*/
 }

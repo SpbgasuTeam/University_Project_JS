@@ -43,13 +43,11 @@ function forTabFun(){
 
 }
 function register(){
-//document.getElementById("submit").addEventListener("click", () => {
+
     var ID = document.getElementById("ID_mb").value;
     var password = document.getElementById("Pa_mb").value;
     var passwordRetype = document.getElementById("PaR_mb").value;
     var name = document.getElementById("Name_mb").value;
-
-
 
         if (name == ""){
             alert("Введите Имя");
@@ -68,9 +66,6 @@ function register(){
             return;
         }
 
-        //const name = document.getElementById("registration_name").value;
-        //const password = document.getElementById("registration_password").value;
-        //const id = document.getElementById("registration_id").value;
         request("POST", "Register", {ID, name, password}, (response) => {
             if (response === "Bad_ID") {
                 alert("Такой пользователь уже зарегистрирован");
@@ -78,6 +73,18 @@ function register(){
                 login(ID,password);
             }
         })
+}
+function login_In(){
+    var ID = document.getElementById("se").value;
+    var Password = document.getElementById("sp").value;
+
+    request("POST", "Login", {ID,Password}, (response) => {
+        if (response === "BAD_data") {
+            alert("Неверные данные");
+        } else {
+            login(ID,Password);
+        }
+    })
 }
 
 
