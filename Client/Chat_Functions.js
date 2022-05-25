@@ -27,6 +27,46 @@ const login = (ID_Sender,Password) =>{
     localStorage.setItem("Password", Password);
     document.location.href = "chat.html";
 }
+function Write_Msgs(Msgs){
+    //alert(element.ID_Sender + " " + element.Text + " " + element.Time);
+    //const date = new Date();
+    const msgtime = Msgs.Time;
+    const ID_Sender = Msgs.ID_Sender;
+    //const ID_Getter = //Msgs.ID_Sender;
+
+    //alert("ID_Sender " + localStorage.getItem('ID_Sender'));
+
+    const Text = Msgs.Text;
+
+    //document.getElementById("send_txt").value = "";
+
+    const chat_ul = document.getElementById("chat_ul");
+    const li = document.createElement("li");
+    const msg = document.createElement("div");
+    const contdate = document.createElement("div");
+    const conttext = document.createElement("div");
+    const contname = document.createElement("div");
+    const conthead = document.createElement("div");
+
+    contdate.textContent = msgtime;
+    conttext.textContent = Text;
+    contname.textContent = ID_Sender;
+
+    conthead.classList.add("head");
+    contdate.classList.add("date");
+    conttext.classList.add("text");
+    contname.classList.add("name");
+    msg.classList.add("msg");
+
+    conthead.appendChild(contdate);
+    conthead.appendChild(contname);
+    msg.appendChild(conthead);
+    msg.appendChild(conttext);
+    li.appendChild(msg);
+    chat_ul.appendChild(li);
+    //let Time = msgtime;
+
+}
 function New_Dialog(ID_Sender,ID_Getter){
 
     const list_chats = document.getElementById("list_chats");
@@ -44,7 +84,16 @@ function New_Dialog(ID_Sender,ID_Getter){
     a_friend.appendChild(head_portrait);
     li.appendChild(a_friend);
     list_chats.appendChild(li);
+    request("POST", "Read", {ID_Sender, ID_Getter}, (response) => {
+        if(response == null) {
+            alert('Error!');
+        }else{
+            response.forEach(element=>{
+                alert(element.ID_Sender + " " + element.Text + " " + element.Time);
 
+            })
+        }
+    });
 
 
     a_friend.addEventListener('click', event => {
@@ -56,8 +105,8 @@ function New_Dialog(ID_Sender,ID_Getter){
                 alert('Error!');
             }else{
                 response.forEach(element=>{
-                    alert(element.ID_Sender + " " + element.Text + " " + element.Time);
-
+                    //alert(element.ID_Sender + " " + element.Text + " " + element.Time);
+                    Write_Msgs(element)
                 })
             }
         });
@@ -68,7 +117,7 @@ send_btn.addEventListener("click", ()=>{
     const date = new Date();
     const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
     const ID_Sender = localStorage.getItem('ID_Sender');
-    const ID_Getter = "2";
+    const ID_Getter = localStorage.getItem('ID_Getter');
     //alert("ID_Sender " + localStorage.getItem('ID_Sender'));
 
     const Text = document.getElementById("send_txt").value;
@@ -101,10 +150,9 @@ send_btn.addEventListener("click", ()=>{
     let Time = msgtime;
 
     request("POST", "New_MSG", {ID_Sender, ID_Getter, Text, Time}, (response) => {
-        alert(response);
+        //alert(response);
     });
 })
-
 /*document.querySelectorAll('.a_friend').forEach(item => {
     item.addEventListener('click', event => {
         //alert("клик");
@@ -128,7 +176,6 @@ send_btn.addEventListener("click", ()=>{
         });
     });
 })*/
-
 add_contact.addEventListener("click", ()=>{
 
     const main_list_chats = document.getElementById("main_list_chats");

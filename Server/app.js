@@ -63,7 +63,7 @@ app.post("/New_MSG", (req, res) => {
         console.log(data);
 
         buf.ID_Sender = body.ID_Sender;
-        buf.TXT_MSG = body.Text;
+        buf.Text = body.Text;
         buf.Time = body.Time;
 
         console.log(buf);
