@@ -1,0 +1,277 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+
+}
+
+.all {
+    width: 100%;
+    height: 1000px;
+    background: linear-gradient(to right, #380735, rgba(7, 48, 59, 0.82));
+
+}
+
+.chat_index {
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black;
+    position: relative;
+    top: 100px;
+    margin: 0 auto;
+}
+
+.chat_banner {
+    background: linear-gradient(to right, #44422c, #315245, rgba(59, 22, 72, 0.89));
+    width: 999px;
+    height: 50px;
+    border: 1px solid black;
+    text-align: right;
+}
+.chat_body {
+    width: 999px;
+    height: 546px;
+    border: 1px solid black;
+}
+
+.chat_online {
+    overflow: hidden;
+    float: left;
+    height: 546px;
+    width: 200px;
+    border: 1px solid black;
+    background-color: #2d2828;
+}
+
+.search_online {
+    text-indent: 1em;
+    height: 40px;
+    border: 1px solid black;
+    margin: auto;
+    background: #2d2828;
+}
+
+.search_online input[type="text"] {
+    outline: none;
+    margin: 2px auto;
+    height: 30px;
+    width: 70%;
+    border-radius: 8px;
+    text-indent: 2em;
+    color: white;
+    background: #1c1f21 ;
+}
+
+.online_friend ul li {
+
+    list-style-type: none;
+}
+
+.online_friend ul li {
+
+    height: 60px;
+    border-bottom: 1px solid #1c1f21;
+    margin-top: 10px;
+
+}
+
+.a_friend {
+    margin-top: -10px;
+    border: 1px solid rgba(2, 11, 14, 0.82);
+    height: 60px;
+    background-color: rgba(57, 25, 66, 0.56);
+
+
+}
+
+.head_portrait {
+    background-color: #290d2f;
+    margin: 6px 6px;
+    float: left;
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+
+}
+
+.head_text {
+    padding: 3px;
+    font-size: 22px;
+    text-align: center;
+    vertical-align: center;
+    margin-top: 6px;
+    margin-left: 40px;
+    color: white;
+}
+
+.friend {
+
+    float: right;
+    height: 54px;
+    width: 140px;
+
+}
+
+.friend .name {
+
+    margin: 4px 6px;
+    float: left;
+}
+
+.friend .this_time {
+    margin-top: 4px;
+    float: right;
+
+}
+
+.chat_main {
+    float: left;
+    width: 548px;
+    height: 546px;
+    border: 1px solid black;
+    background-color: #7e7a7a;
+    background-size: cover;
+    color:white;
+}
+
+
+.send_message {
+    width: 549px;
+    left: 202.5px;
+    height: 67px;
+    position: absolute;
+    bottom: -1px;
+    border: 1px solid black;
+    background: linear-gradient(to bottom, rgb(66, 27, 27), #172b36);
+}
+
+.send_message input[type="text"] {
+    width: 470px;
+    height: 30px;
+    margin-top: 16px;
+    margin-left: 10px;
+    border-radius: 10px 0 0 10px;
+    text-indent: 2em;
+    outline: none;
+    background-color: rgba(5, 23, 28, 0.82);
+    border: 1px solid black;
+    color: white;
+
+}
+
+.send_message input[type="button"] {
+    border-radius: 0 10px 10px 0;
+    width: 35px;
+    height: 30px;
+    background-color: #2d2828;
+    border: 1px solid black;
+    outline: none;
+    color: white;
+}
+
+.send_message input[type="button"]:hover {
+    background-color: rgba(44, 27, 43, 0.85);
+
+}
+
+.send_message input[type="button"]:active {
+    background-color: rgba(2, 11, 14, 0.82);
+}
+
+.chat_namecard {
+    float: left;
+    width: 245px;
+    height: 546px;
+    border: 1px solid black;
+    background-color: #383636;
+}
+
+
+.chat_content ul{
+    list-style-type: none;
+}
+.chat_content{
+    overflow: auto;
+    width: 540px;
+    height: 470px;
+}
+.chat_content li{
+    margin-top: 10px;
+    width: 540px;
+    clear: both;
+    display: block;
+    opacity: .3;
+
+}
+
+.chat_content li img{
+    margin: 6px 0 0 0;
+}
+
+.chat_content li span {
+    background: #e1d8d8;
+    padding: 10px;
+    border-radius: 10px;
+/ * Максимальная ширина не может быть слишком большой, иначе макет будет беспорядочным * /
+max-width: 400px;
+    border: 1px solid white;
+    box-shadow: 0 0 3px #879eee;
+    margin: 6px 10px 0 10px;
+    overflow: hidden;
+    opacity: .3;
+}
+
+.chat_content li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.chat_content li img.imgleft {
+    margin-left: 10px;
+    float: left;
+}
+
+.chat_content li img.imgright {
+    margin-right: 10px;
+    float: right;
+}
+
+.chat_content li span.spanleft {
+    float: left;
+}
+
+.chat_content li span.spanright {
+    float: right;
+}
+
+.settings input[type="button"] {
+    border-radius: 10%;
+    width: 80px;
+    height: 30px;
+    background-color: #3b3232;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-right: 10px;
+    color:white
+}
+.settings input[type="button"]:hover {
+    background-color: rgba(35, 24, 63, 0.68);
+
+}
+
+.settings input[type="button"]:active {
+    transition: 50ms;
+    background-color: rgb(66, 28, 28);
+}
+
+.mbar {
+    padding: 5px; margin: 5px;
+    background: #eee;
+    border: 1px solid #aaa;
+}
+.err {
+    background: #ffe7f4;
+    border: 1px solid #ff6a6a;
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>chat</title>
-    <link rel="stylesheet" href="for_chat.css" type="text/css">
+    <link rel="stylesheet"  id="theme" href="for_chat.css" type="text/css">
 
 </head>
 <body>
@@ -14,7 +14,7 @@
 
             <div class="settings">
                 <form>
-                    <input type = "button" value = "Настройки" id = "setting">
+                    <input type = "button" value = "Темная тема" onclick="switch_Mode()" onclick="tema" id = "switchMode">
                     <input type = "button" value = "Выход" onclick= Exit() id = "exit">
                 </form>
             </div>
@@ -62,4 +62,5 @@
 </div>
 </body>
 <script src="Chat_Functions.js"></script>
+<script src="Switch_css.js"></script>
 </html>
