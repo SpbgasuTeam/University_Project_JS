@@ -10,7 +10,7 @@ function Add_json_DT(New_Json){
 
     var Data_B = fs.readFileSync('Server/DT_users.json','utf8');
     var Buf=JSON.parse(Data_B);
-    console.log(Buf)
+    //console.log(Buf)
     Buf.push(New_Json);
 
     fs.writeFile('Server/DT_users.json',JSON.stringify(Buf),(err)=>{
@@ -52,7 +52,7 @@ app.post("/Register", (req, res) => {
 app.post("/New_MSG", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody);
-        console.log(JSON.parse(requestBody));
+        //console.log(JSON.parse(requestBody));
         let data = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf8")) || {};
         const buf ={
             "ID_Sender":0,
@@ -60,13 +60,13 @@ app.post("/New_MSG", (req, res) => {
             "Time":"24.05.2022"
         }
 
-        console.log(data);
+        //console.log(data);
 
-        buf.ID_Sender = body.ID_Sender;
+        buf.ID_Sender =  body.ID_Sender;
         buf.Text = body.Text;
         buf.Time = body.Time;
 
-        console.log(buf);
+        //console.log(buf);
 
         data.forEach(element => {
             if ((body.ID_Sender == element.ID[0] && body.ID_Getter == element.ID[1]) || (body.ID_Sender == element.ID[1] && body.ID_Getter == element.ID[0])) {
@@ -74,7 +74,7 @@ app.post("/New_MSG", (req, res) => {
             }
         })
 
-        console.log(data);
+        c//onsole.log(data);
 
         fs.writeFile('Server/DT_Mail.json',JSON.stringify(data),(err)=>{
             if(err) console.log('Error');
@@ -178,25 +178,19 @@ app.post("/Get_Dialogs", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
         const data = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf-8"));
-        //let check=0;
-        let buf=[{"ID_Sender":0,"ID_Getter":0}];
+
+        let buf=[];
         data.forEach(element => {
-            //console.log(body.My_ID);
 
             if (body.My_ID == element.ID[0]){
                 buf.push({"ID_Sender":element.ID[0],"ID_Getter":element.ID[1]})
-                //console.log(body);
-                //console.log(element.ID[0]);
-                //console.log(element.ID[1]);
+
             }
             else if(body.My_ID == element.ID[1]){
                 buf.push({"ID_Sender":element.ID[1],"ID_Getter":element.ID[0]})
-                //console.log(body);
-                //console.log(element.ID[0]);
-                //console.log(element.ID[1]);
             }
         })
-        //console.log(buf);
+        buf.delete
         res.send(buf);
     })
 })

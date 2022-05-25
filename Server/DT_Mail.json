@@ -1,37 +1,24 @@
 [
   {
     "ID": [
-      "1",
-      "2"
-    ],
-    "All_Msg": [
-      {
-        "Sender": "1",
-        "Text": "Hi",
-        "Time": "01,02,2022"
-      },
-      {
-        "Sender": "2",
-        "Text": "Hi,dear!",
-        "Time": "02,02,2022"
-      }
-    ]
-  },
-  {
-    "ID": [
       "2",
-      "3"
+      "6"
     ],
     "All_Msg": [
       {
-        "Sender": "2",
-        "Text": "Hi!",
-        "Time": "01,02,2022"
+        "ID_Sender": "2",
+        "Text": "Hi",
+        "Time": "15:43 25.4.2022"
       },
       {
-        "Sender": "3",
-        "Text": "Hi,dear!!",
-        "Time": "02,02,2022"
+        "ID_Sender": "2",
+        "Text": "GI",
+        "Time": "15:45 25.4.2022"
+      },
+      {
+        "ID_Sender": "2",
+        "Text": "Ne typi",
+        "Time": "15:46 25.4.2022"
       }
     ]
   }

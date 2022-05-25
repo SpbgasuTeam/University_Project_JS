@@ -1,8 +1,3 @@
-/*var emailArray=[];
-var passwordArray=[];
-var nameArray=[];
-var surnameArray=[];
-var patronymicArray=[];*/
 
 var loginBox = document.getElementById("login");
 var regBox = document.getElementById("register");
