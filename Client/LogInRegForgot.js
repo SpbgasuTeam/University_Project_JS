@@ -60,7 +60,7 @@ function register(){
             alert("Пароли не совпадают");
             return;
         }
-
+    let Password = password;
         request("POST", "Register", {ID, name, Password}, (response) => {
             if (response === "Bad_ID") {
                 alert("Такой пользователь уже зарегистрирован");

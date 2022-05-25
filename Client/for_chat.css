@@ -149,8 +149,9 @@ width: 999px;
     border: 1px solid black;
 }
 
-.send_message input[type="button"] {
+.send_message span {
     border-radius: 0 10px 10px 0;
+    padding:5px;
     width: 35px;
     height: 30px;
     background-color: white;
@@ -158,11 +159,11 @@ width: 999px;
     outline: none;
 }
 
-.send_message input[type="button"]:hover {
+.send_message span:hover {
     background-color: rgba(255, 117, 247, 0.85);
 }
 
-.send_message input[type="button"]:active {
+.send_message span:active {
     background-color: rgb(241, 49, 255);
 }
 

@@ -38,6 +38,8 @@ const login = (ID_Sender,Password) =>{
 
     localStorage.setItem('ID_Sender', ID_Sender);
     localStorage.setItem("Password", Password);
+    //localStorage.setItem("ID_Getter", "");
+
     document.location.href = "chat.html";
 
 }
@@ -162,9 +164,16 @@ function Exit(){
     localStorage.clear();
 }
 
+document.addEventListener( 'keydown', event => {
+    if( event.code === 'Enter' ) {
+        document.getElementById("send_btn").click();
+        event.preventDefault();
+        }
+});
+
 send_btn.addEventListener("click", ()=>{
 
-    if(document.getElementById("send_txt").value) {
+    if(document.getElementById("send_txt").value && localStorage.getItem('ID_Getter')) {
         const date = new Date();
         const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
         const ID_Sender = localStorage.getItem('ID_Sender');
@@ -241,4 +250,8 @@ add_contact.addEventListener("click", ()=>{
             }
         });
     }
+})
+
+document.getElementById("form").addEventListener("submit",(e)=>{
+    e.preventDefault();
 })
