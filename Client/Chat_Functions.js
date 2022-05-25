@@ -83,31 +83,46 @@ document.querySelectorAll('.a_friend').forEach(item => {
     });
 })
 add_contact.addEventListener("click", ()=>{
-    const ID_Getter = "5454";
-    const ID_Sender = "1";
+    const main_list_chats = document.getElementById("main_list_chats");
+    const str = document.createElement("input");
+    const btn = document.createElement("input");
+    btn.id = "add_btn_id";
+    str.id = "add_str_id";
+    btn.type = "button";
+    btn.value = "Добавить";
+    str.classList.add("search_online_add");
+    btn.classList.add("search_online_add");
+    main_list_chats.appendChild(str);
+    main_list_chats.appendChild(btn);
 
-    request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
-        if(response == 'Wrong_ID'){
-            alert('Wrong_ID')
-        }else{
-            alert('Done!')
+    btn.addEventListener("click", ()=>{
+        const ID_Getter = str.value;
+        const ID_Sender = "1";
+        request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
+            if(response == 'Wrong_ID'){
+                alert('Wrong_ID')
+            }else{
+                alert('Done!')
 
-            const list_chats = document.getElementById("list_chats");
-            const li = document.createElement("li");
-            const a_friend = document.createElement("div");
-            const head_portrait = document.createElement("div");
-            const head_text = document.createElement("div");
-            head_text.textContent = ID_Getter;
+                const list_chats = document.getElementById("list_chats");
+                const li = document.createElement("li");
+                const a_friend = document.createElement("div");
+                const head_portrait = document.createElement("div");
+                const head_text = document.createElement("div");
+                head_text.textContent = ID_Getter;
 
-            head_text.classList.add("head_text");
-            head_portrait.classList.add("head_portrait");
-            a_friend.classList.add("a_friend");
+                head_text.classList.add("head_text");
+                head_portrait.classList.add("head_portrait");
+                a_friend.classList.add("a_friend");
 
-            head_portrait.appendChild(head_text);
-            a_friend.appendChild(head_portrait);
-            li.appendChild(a_friend);
-            list_chats.appendChild(li);
-        }
+                head_portrait.appendChild(head_text);
+                a_friend.appendChild(head_portrait);
+                li.appendChild(a_friend);
+                list_chats.appendChild(li);
+            }
+        });
+        str.remove();
+        btn.remove();
     });
 
 
