@@ -51,14 +51,14 @@ app.post("/New_MSG", (req, res) => {
         let data = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf8")) || {};
         const buf ={
             "ID_Sender":0,
-            "TXT_MSG":"",
+            "Text":"",
             "Time":"24.05.2022"
         }
 
         console.log(data);
 
         buf.ID_Sender = body.ID_Sender;
-        buf.TXT_MSG = body.Text;
+        buf.Text = body.Text;
         buf.Time = body.Time;
 
         console.log(buf);
@@ -112,7 +112,7 @@ app.post("/New_Dialog", (req, res) => {
         })
         if (check == 1) {
             Create_Dialog(buf);
-            res.send(JSON.stringify("GOOD"))
+            res.send(body.ID_Getter)
         } else {
             //alert("Wrong ID!")
             res.send(JSON.stringify("Wrong_ID!"));

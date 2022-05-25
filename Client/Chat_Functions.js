@@ -22,9 +22,9 @@ const request = (type, path, data, fun) => {
     };
     xhr.send(JSON.stringify(data));
 }
-const login = (id,password) =>{
-    localStorage.setItem("id", id);
-    localStorage.setItem("password", password);
+const login = (ID_Sender,Password) =>{
+    localStorage.setItem('ID_Sender', ID_Sender);
+    localStorage.setItem("Password", Password);
     document.location.href = "chat.html";
 }
 
@@ -32,8 +32,10 @@ const login = (id,password) =>{
 send_btn.addEventListener("click", ()=>{
     const date = new Date();
     const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
-    const ID_Sender = "1";
+    const ID_Sender = localStorage.getItem('ID_Sender');
     const ID_Getter = "2";
+    //alert("ID_Sender " + localStorage.getItem('ID_Sender'));
+
     const Text = document.getElementById("send_txt").value;
     document.getElementById("send_txt").value = "";
 
@@ -70,26 +72,34 @@ send_btn.addEventListener("click", ()=>{
 document.querySelectorAll('.a_friend').forEach(item => {
     item.addEventListener('click', event => {
         //alert("клик");
-        const ID_Sender = "1";
+        const ID_Sender = localStorage.getItem('ID_Sender');
         const ID_Getter = "2";
         request("POST", "Read", {ID_Sender, ID_Getter}, (response) => {
             //функция для вывода сообщений на веб
-            if(response == 'Save') {
-                alert('MSG SEND!');
-            }else{
+            if(response == null) {
                 alert('Error!');
+            }else{
+                response.forEach(element=>{
+                    alert(element.ID_Sender + " " + element.Text + " " + element.Time);
+
+                })
             }
         });
     });
 })
 add_contact.addEventListener("click", ()=>{
+    //const li = document.getElementById("li");
+    //li.getElementsByTagName()
+
     const ID_Getter = "5454";
-    const ID_Sender = "1";
+    const ID_Sender = localStorage.getItem('ID_Sender');
 
     request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
         if(response == 'Wrong_ID'){
             alert('Wrong_ID')
         }else{
+
+            localStorage.getItem('ID_Getter',response);
             alert('Done!')
 
             const list_chats = document.getElementById("list_chats");
