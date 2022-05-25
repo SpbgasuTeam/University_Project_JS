@@ -34,7 +34,8 @@ send_btn.addEventListener("click", ()=>{
     const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
     const ID_Sender = "1";
     const ID_Getter = "2";
-    const Text = "HI";
+    const Text = document.getElementById("send_txt").value;
+    document.getElementById("send_txt").value = "";
 
     const chat_ul = document.getElementById("chat_ul");
     const li = document.createElement("li");

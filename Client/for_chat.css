@@ -298,4 +298,5 @@ width: 999px;
     float: none;
     background-color: white;
     padding: 5px;
+    word-break: break-all;
 }
