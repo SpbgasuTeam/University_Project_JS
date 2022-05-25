@@ -27,7 +27,42 @@ const login = (ID_Sender,Password) =>{
     localStorage.setItem("Password", Password);
     document.location.href = "chat.html";
 }
+function New_Dialog(ID_Sender,ID_Getter){
 
+    const list_chats = document.getElementById("list_chats");
+    const li = document.createElement("li");
+    const a_friend = document.createElement("div");
+    const head_portrait = document.createElement("div");
+    const head_text = document.createElement("div");
+    head_text.textContent = ID_Getter;
+
+    head_text.classList.add("head_text");
+    head_portrait.classList.add("head_portrait");
+    a_friend.classList.add("a_friend");
+
+    head_portrait.appendChild(head_text);
+    a_friend.appendChild(head_portrait);
+    li.appendChild(a_friend);
+    list_chats.appendChild(li);
+
+
+
+    a_friend.addEventListener('click', event => {
+        const ID_Getter = a_friend.getElementsByClassName("head_portrait")[0].getElementsByClassName("head_text")[0].textContent;
+        //alert(ID_Getter);
+
+        request("POST", "Read", {ID_Sender, ID_Getter}, (response) => {
+            if(response == null) {
+                alert('Error!');
+            }else{
+                response.forEach(element=>{
+                    alert(element.ID_Sender + " " + element.Text + " " + element.Time);
+
+                })
+            }
+        });
+    });
+}
 
 send_btn.addEventListener("click", ()=>{
     const date = new Date();
@@ -69,11 +104,17 @@ send_btn.addEventListener("click", ()=>{
         alert(response);
     });
 })
-document.querySelectorAll('.a_friend').forEach(item => {
+
+/*document.querySelectorAll('.a_friend').forEach(item => {
     item.addEventListener('click', event => {
         //alert("клик");
         const ID_Sender = localStorage.getItem('ID_Sender');
-        const ID_Getter = "2";
+
+        //const ID_Getter = item.head_text.value
+        //alert(item.textContent)
+        localStorage.setItem('ID_Getter',item.textContent);
+        //alert('Doog')
+        const ID_Getter = localStorage.getItem('ID_Getter');
         request("POST", "Read", {ID_Sender, ID_Getter}, (response) => {
             //функция для вывода сообщений на веб
             if(response == null) {
@@ -86,42 +127,14 @@ document.querySelectorAll('.a_friend').forEach(item => {
             }
         });
     });
-})
+})*/
+
 add_contact.addEventListener("click", ()=>{
-    //const li = document.getElementById("li");
-    //li.getElementsByTagName()
 
-    const ID_Getter = "5454";
-    const ID_Sender = localStorage.getItem('ID_Sender');
-
-    request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
-        if(response == 'Wrong_ID'){
-            alert('Wrong_ID')
-        }else{
-
-            localStorage.getItem('ID_Getter',response);
-            alert('Done!')
-
-            const list_chats = document.getElementById("list_chats");
-            const li = document.createElement("li");
-            const a_friend = document.createElement("div");
-            const head_portrait = document.createElement("div");
-            const head_text = document.createElement("div");
-            head_text.textContent = ID_Getter;
-
-            head_text.classList.add("head_text");
-            head_portrait.classList.add("head_portrait");
-            a_friend.classList.add("a_friend");
-
-            head_portrait.appendChild(head_text);
-            a_friend.appendChild(head_portrait);
-            li.appendChild(a_friend);
-            list_chats.appendChild(li);
-        }
-=======
     const main_list_chats = document.getElementById("main_list_chats");
     const str = document.createElement("input");
     const btn = document.createElement("input");
+
     btn.id = "add_btn_id";
     str.id = "add_str_id";
     btn.type = "button";
@@ -132,31 +145,25 @@ add_contact.addEventListener("click", ()=>{
     main_list_chats.appendChild(btn);
 
     btn.addEventListener("click", ()=>{
+
+
         const ID_Getter = str.value;
-        const ID_Sender = "1";
+        const ID_Sender = localStorage.getItem('ID_Sender');
+        //alert(ID_Getter +" "+ ID_Sender)
+
         request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
             if(response == 'Wrong_ID'){
                 alert('Wrong_ID')
-            }else{
-                alert('Done!')
-
-                const list_chats = document.getElementById("list_chats");
-                const li = document.createElement("li");
-                const a_friend = document.createElement("div");
-                const head_portrait = document.createElement("div");
-                const head_text = document.createElement("div");
-                head_text.textContent = ID_Getter;
-
-                head_text.classList.add("head_text");
-                head_portrait.classList.add("head_portrait");
-                a_friend.classList.add("a_friend");
-
-                head_portrait.appendChild(head_text);
-                a_friend.appendChild(head_portrait);
-                li.appendChild(a_friend);
-                list_chats.appendChild(li);
             }
-        });
+            else if(response == 'Error!'){
+                alert('This dialog already in!')
+            }else{
+                localStorage.setItem('ID_Getter', response);
+                const ID_Sender = localStorage.getItem('ID_Sender');
+                New_Dialog(ID_Sender,ID_Getter)
+            }
+        })
+
         str.remove();
         btn.remove();
     });

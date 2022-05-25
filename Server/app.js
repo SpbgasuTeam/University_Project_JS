@@ -10,7 +10,7 @@ function Add_json_DT(New_Json){
 
     var Data_B = fs.readFileSync('Server/DT_users.json','utf8');
     var Buf=JSON.parse(Data_B);
-
+    console.log(Buf)
     Buf.push(New_Json);
 
     fs.writeFile('Server/DT_users.json',JSON.stringify(Buf),(err)=>{
@@ -18,9 +18,13 @@ function Add_json_DT(New_Json){
     });
 }
 function Create_Dialog(Users){
-    const data = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf8")) || {};
-    data.push(Users);
-    fs.writeFile('Server/DT_Mail.json',JSON.stringify(data),(err)=>{
+    let dataM = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf8")) || {};
+    //let Buf=JSON.parse(dataM);
+    console.log(dataM)
+    Buf.push(Users);
+    console.log(JSON.stringify(dataM))
+
+    fs.writeFile('Server/DT_Mail.json',JSON.stringify(Buf),(err)=>{
         if(err) console.log('Error');
     });
 }
@@ -58,7 +62,7 @@ app.post("/New_MSG", (req, res) => {
         console.log(data);
 
         buf.ID_Sender = body.ID_Sender;
-        buf.Text = body.Text;
+        buf.TXT_MSG = body.Text;
         buf.Time = body.Time;
 
         console.log(buf);
@@ -101,20 +105,32 @@ app.post("/New_Dialog", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody);
         const users = JSON.parse(fs.readFileSync(`Server/DT_users.json`, "utf-8"));
+        let data  = JSON.parse(fs.readFileSync(`Server/DT_Mail.json`, "utf-8"));
 
         const buf = {"ID":[body.ID_Sender,body.ID_Getter],"All_Msg":[]}
         let check=0;
-
+        //console.log((body.ID_Sender))
+        //console.log((body.ID_Getter))
         users.forEach(element => {
             if (body.ID_Getter == element.ID) {
                 check = 1;
             }
         })
+
+        //console.log((data));
+
         if (check == 1) {
-            Create_Dialog(buf);
-            res.send(body.ID_Getter)
+
+            data.forEach(element2 => {
+                if ((body.ID_Sender == element2.ID[0] && body.ID_Getter == element2.ID[1]) || (body.ID_Sender == element2.ID[1] && body.ID_Getter == element2.ID[0])) {
+                    res.send(JSON.stringify("Error!"));
+                }else{
+                    Create_Dialog(buf);
+                    res.send(body.ID_Getter)
+                }
+            })
+
         } else {
-            //alert("Wrong ID!")
             res.send(JSON.stringify("Wrong_ID!"));
         }
 
