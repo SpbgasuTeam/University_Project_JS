@@ -79,21 +79,7 @@
 
     </div>
 </div>
-<script>
-    alert("Start")
-        const My_ID=localStorage.getItem('ID_Sender');
-
-        request("POST", "Get_Dialogs", {My_ID}, (response) => {
-            if (response == null) {
-                alert('Error!');
-            } else {
-                alert(response.ID_Sender + " " + response.ID_Getter);
-                response.forEach(element => {
-                   // alert(element.ID_Sender + " " + element.Text + " " + element.Time);
-                })
-            }
-        });
-</script>
+<script src="Log_In.js"></script>
 
 <script src="Functions.js"></script>
 </body>

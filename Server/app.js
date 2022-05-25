@@ -178,16 +178,25 @@ app.post("/Get_Dialogs", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
         const data = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf-8"));
-        let check=0;
-        let buf=[];
+        //let check=0;
+        let buf=[{"ID_Sender":0,"ID_Getter":0}];
         data.forEach(element => {
-            if (body.ID_Sender == element.ID[0]){
+            //console.log(body.My_ID);
+
+            if (body.My_ID == element.ID[0]){
                 buf.push({"ID_Sender":element.ID[0],"ID_Getter":element.ID[1]})
+                //console.log(body);
+                //console.log(element.ID[0]);
+                //console.log(element.ID[1]);
             }
-            else if(body.ID_Sender == element.ID[1]){
+            else if(body.My_ID == element.ID[1]){
                 buf.push({"ID_Sender":element.ID[1],"ID_Getter":element.ID[0]})
+                //console.log(body);
+                //console.log(element.ID[0]);
+                //console.log(element.ID[1]);
             }
         })
+        //console.log(buf);
         res.send(buf);
     })
 })

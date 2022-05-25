@@ -1,6 +1,5 @@
-//alert('Hi')
 
-
+const My_ID=localStorage.getItem('ID_Sender');
 const add_contact = document.getElementById("add_contact");
 const send_btn = document.getElementById("send_btn");
 
@@ -25,6 +24,19 @@ const request = (type, path, data, fun) => {
     };
     xhr.send(JSON.stringify(data));
 }
+request("POST", "Get_Dialogs", {My_ID}, (response) => {
+    alert(response);
+    if (response == null) {
+        alert('Error!');
+    } else {
+        //alert(response);
+        response.forEach(element => {
+             alert(element.ID_Sender +  element.ID_Getter);
+
+        })
+    }
+});
+
 const login = (ID_Sender,Password) =>{
     localStorage.setItem('ID_Sender', ID_Sender);
     localStorage.setItem("Password", Password);
