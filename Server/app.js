@@ -13,7 +13,7 @@ function Add_json_DT(New_Json){
     console.log(Buf)
     Buf.push(New_Json);
 
-    fs.writeFile('Server/DT_users.json',Buf,(err)=>{
+    fs.writeFile('Server/DT_users.json',JSON.stringify(Buf),(err)=>{
         if(err) console.log('Error');
     });
 }
@@ -171,6 +171,29 @@ app.post("/Forgot", (req, res) => {
             }
         })
         if( check==0 ){res.send('BAD_ID');}
+
+    })
+})
+app.post("/Get_Dialogs", (req, res) => {
+    req.on('data', requestBody => {
+        const body = JSON.parse(requestBody.toString());
+        const data = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf-8"));
+        let check=0;
+        let buf=[];
+        data.forEach(element => {
+            if (body.ID_Sender == element.ID[0]){
+                buf.push({"ID_Sender":element.ID[0],"ID_Getter":element.ID[1]})
+            }
+            else if(body.ID_Sender == element.ID[1]){
+                buf.push({"ID_Sender":element.ID[1],"ID_Getter":element.ID[0]})
+                //body.ID_Sender == element.ID[1]
+                //buf.push({})
+                //res.send(element.Password);
+                //check=1;
+            }
+        })
+        res.send(buf);
+        //if( check==0 ){res.send('BAD_ID');}
 
     })
 })

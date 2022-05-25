@@ -1,3 +1,15 @@
+//alert('Hi')
+request("POST", "Get_Dialogs", {ID_Sender}, (response) => {
+    if(response == null) {
+        alert('Error!');
+    }else{
+        response.forEach(element=>{
+            alert(element.ID_Sender + " " + element.Text + " " + element.Time);
+        })
+    }
+});
+
+
 const add_contact = document.getElementById("add_contact");
 const send_btn = document.getElementById("send_btn");
 
