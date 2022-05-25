@@ -13,18 +13,19 @@ function Add_json_DT(New_Json){
     console.log(Buf)
     Buf.push(New_Json);
 
-    fs.writeFile('Server/DT_users.json',JSON.stringify(Buf),(err)=>{
+    fs.writeFile('Server/DT_users.json',Buf,(err)=>{
         if(err) console.log('Error');
     });
 }
 function Create_Dialog(Users){
-    let dataM = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf8")) || {};
-    //let Buf=JSON.parse(dataM);
-    console.log(dataM)
-    Buf.push(Users);
-    console.log(JSON.stringify(dataM))
 
-    fs.writeFile('Server/DT_Mail.json',JSON.stringify(Buf),(err)=>{
+    let dataM = JSON.parse(fs.readFileSync("Server/DT_Mail.json", "utf8"));
+    //let Buf=JSON.parse(dataM);
+    //console.log(dataM)
+    dataM.push(Users);
+    //console.log(JSON.stringify(dataM))
+
+    fs.writeFile('Server/DT_Mail.json',JSON.stringify(dataM),(err)=>{
         if(err) console.log('Error');
     });
 }
@@ -109,26 +110,31 @@ app.post("/New_Dialog", (req, res) => {
 
         const buf = {"ID":[body.ID_Sender,body.ID_Getter],"All_Msg":[]}
         let check=0;
+        let check2=0;
         //console.log((body.ID_Sender))
         //console.log((body.ID_Getter))
         users.forEach(element => {
-            if (body.ID_Getter == element.ID) {
-                check = 1;
-            }
-        })
+            if (body.ID_Getter == element.ID) { check = 1;}
+        });
 
         //console.log((data));
 
         if (check == 1) {
-
             data.forEach(element2 => {
-                if ((body.ID_Sender == element2.ID[0] && body.ID_Getter == element2.ID[1]) || (body.ID_Sender == element2.ID[1] && body.ID_Getter == element2.ID[0])) {
-                    res.send(JSON.stringify("Error!"));
+                if ((body.ID_Sender == element2.ID[0] && body.ID_Getter == element2.ID[1]) || (body.ID_Sender == element2.ID[1] && body.ID_Getter == element2.ID[0])){
+                    //res.send(JSON.stringify("Error!"));
+                    check2=1;
                 }else{
-                    Create_Dialog(buf);
-                    res.send(body.ID_Getter)
+                    //check2=1;
                 }
-            })
+            });
+
+            if(check2){
+                res.send(JSON.stringify("Error!"));
+            }else{
+                Create_Dialog(buf);
+                res.send(body.ID_Getter)
+            }
 
         } else {
             res.send(JSON.stringify("Wrong_ID!"));
