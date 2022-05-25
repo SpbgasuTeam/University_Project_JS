@@ -38,9 +38,11 @@ request("POST", "Get_Dialogs", {My_ID}, (response) => {
 });
 
 const login = (ID_Sender,Password) =>{
+
     localStorage.setItem('ID_Sender', ID_Sender);
     localStorage.setItem("Password", Password);
     document.location.href = "chat.html";
+
 }
 function Write_Msgs(Msgs){
     //alert(element.ID_Sender + " " + element.Text + " " + element.Time);
