@@ -266,6 +266,16 @@ width: 999px;
     background-color: rgb(241, 49, 255);
 }
 
+.search_online_add {
+    border-radius: 10%;
+    width: 150px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    margin: 5px;
+}
+
+
 .msg {
     display: flex;
     flex-direction: column;
