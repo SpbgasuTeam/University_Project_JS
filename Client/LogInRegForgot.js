@@ -66,7 +66,7 @@ function register(){
             return;
         }
 
-        request("POST", "Register", {ID, name, password}, (response) => {
+        request("POST", "Register", {ID, name, Password}, (response) => {
             if (response === "Bad_ID") {
                 alert("Такой пользователь уже зарегистрирован");
             } else {

@@ -1,13 +1,4 @@
 //alert('Hi')
-request("POST", "Get_Dialogs", {ID_Sender}, (response) => {
-    if(response == null) {
-        alert('Error!');
-    }else{
-        response.forEach(element=>{
-            alert(element.ID_Sender + " " + element.Text + " " + element.Time);
-        })
-    }
-});
 
 
 const add_contact = document.getElementById("add_contact");
@@ -111,11 +102,15 @@ function New_Dialog(ID_Sender,ID_Getter){
     a_friend.addEventListener('click', event => {
         const ID_Getter = a_friend.getElementsByClassName("head_portrait")[0].getElementsByClassName("head_text")[0].textContent;
         //alert(ID_Getter);
-
+        localStorage.setItem('ID_Getter', ID_Getter);
         request("POST", "Read", {ID_Sender, ID_Getter}, (response) => {
             if(response == null) {
                 alert('Error!');
             }else{
+                var deleteElement = document.getElementById("chat_ul").querySelectorAll('li');
+                for (let i = 0; i < deleteElement.length; i++) {
+                    deleteElement[i].remove();
+                }
                 response.forEach(element=>{
                     //alert(element.ID_Sender + " " + element.Text + " " + element.Time);
                     Write_Msgs(element)

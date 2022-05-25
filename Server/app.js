@@ -186,15 +186,9 @@ app.post("/Get_Dialogs", (req, res) => {
             }
             else if(body.ID_Sender == element.ID[1]){
                 buf.push({"ID_Sender":element.ID[1],"ID_Getter":element.ID[0]})
-                //body.ID_Sender == element.ID[1]
-                //buf.push({})
-                //res.send(element.Password);
-                //check=1;
             }
         })
         res.send(buf);
-        //if( check==0 ){res.send('BAD_ID');}
-
     })
 })
 app.listen(80)
