@@ -163,75 +163,82 @@ function Exit(){
 }
 
 send_btn.addEventListener("click", ()=>{
-    const date = new Date();
-    const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
-    const ID_Sender = localStorage.getItem('ID_Sender');
-    const ID_Getter = localStorage.getItem('ID_Getter');
 
-    const Text = document.getElementById("send_txt").value;
-    document.getElementById("send_txt").value = "";
-
-    const chat_ul = document.getElementById("chat_ul");
-    const li = document.createElement("li");
-    const msg = document.createElement("div");
-    const contdate = document.createElement("div");
-    const conttext = document.createElement("div");
-    const contname = document.createElement("div");
-    const conthead = document.createElement("div");
-
-    contdate.textContent = msgtime;
-    conttext.textContent = Text;
-    contname.textContent = ID_Sender;
-
-    conthead.classList.add("head");
-    contdate.classList.add("date");
-    conttext.classList.add("text");
-    contname.classList.add("name");
-    msg.classList.add("msg");
-
-    conthead.appendChild(contdate);
-    conthead.appendChild(contname);
-    msg.appendChild(conthead);
-    msg.appendChild(conttext);
-    li.appendChild(msg);
-    chat_ul.appendChild(li);
-    let Time = msgtime;
-
-    request("POST", "New_MSG", {ID_Sender, ID_Getter, Text, Time}, (response) => {
-    });
-})
-add_contact.addEventListener("click", ()=>{
-    const main_list_chats = document.getElementById("main_list_chats");
-    const str = document.createElement("input");
-    const btn = document.createElement("input");
-
-    btn.id = "add_btn_id";
-    str.id = "add_str_id";
-    btn.type = "button";
-    btn.value = "Добавить";
-    str.classList.add("search_online_add");
-    btn.classList.add("search_online_add");
-    main_list_chats.appendChild(str);
-    main_list_chats.appendChild(btn);
-
-    btn.addEventListener("click", ()=>{
-        const ID_Getter = str.value;
+    if(document.getElementById("send_txt").value) {
+        const date = new Date();
+        const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
         const ID_Sender = localStorage.getItem('ID_Sender');
+        const ID_Getter = localStorage.getItem('ID_Getter');
 
-        request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
-            if(response == 'Wrong_ID'){
-                alert('Wrong_ID')
-            }
-            else if(response == 'Error!'){
-                alert('This dialog already in!')
-            }else{
-                localStorage.setItem('ID_Getter', response);
+        const Text = document.getElementById("send_txt").value;
+        document.getElementById("send_txt").value = "";
+
+        const chat_ul = document.getElementById("chat_ul");
+        const li = document.createElement("li");
+        const msg = document.createElement("div");
+        const contdate = document.createElement("div");
+        const conttext = document.createElement("div");
+        const contname = document.createElement("div");
+        const conthead = document.createElement("div");
+
+        contdate.textContent = msgtime;
+        conttext.textContent = Text;
+        contname.textContent = "Msg by:" + ID_Sender;
+
+        conthead.classList.add("head");
+        contdate.classList.add("date");
+        conttext.classList.add("text");
+        contname.classList.add("name");
+        msg.classList.add("msg");
+
+        conthead.appendChild(contdate);
+        conthead.appendChild(contname);
+        msg.appendChild(conthead);
+        msg.appendChild(conttext);
+        li.appendChild(msg);
+        chat_ul.appendChild(li);
+        let Time = msgtime;
+
+        request("POST", "New_MSG", {ID_Sender, ID_Getter, Text, Time}, (response) => {
+        });
+    }
+})
+
+add_contact.addEventListener("click", ()=>{
+    if(!document.getElementById("add_btn_id")) {
+        const main_list_chats = document.getElementById("main_list_chats");
+        const str = document.createElement("input");
+        const btn = document.createElement("input");
+
+        btn.id = "add_btn_id";
+        str.id = "add_str_id";
+        btn.type = "button";
+        btn.value = "Добавить";
+        str.classList.add("search_online_add");
+        btn.classList.add("search_online_add");
+        main_list_chats.appendChild(str);
+        main_list_chats.appendChild(btn);
+
+        btn.addEventListener("click", () => {
+            const ID_Getter = str.value;
+            if(ID_Getter) {
                 const ID_Sender = localStorage.getItem('ID_Sender');
-                New_Dialog(ID_Sender,ID_Getter)
-            }
-        })
 
-        str.remove();
-        btn.remove();
-    });
+                request("POST", "New_Dialog", {ID_Sender, ID_Getter}, (response) => {
+                    if (response == 'Wrong_ID') {
+                        alert('Wrong_ID')
+                    } else if (response == 'Error!') {
+                        alert('This dialog already in!')
+                    } else {
+                        localStorage.setItem('ID_Getter', response);
+                        const ID_Sender = localStorage.getItem('ID_Sender');
+                        New_Dialog(ID_Sender, ID_Getter)
+                    }
+                })
+
+                str.remove();
+                btn.remove();
+            }
+        });
+    }
 })

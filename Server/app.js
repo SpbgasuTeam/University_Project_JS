@@ -74,7 +74,7 @@ app.post("/New_MSG", (req, res) => {
             }
         })
 
-        c//onsole.log(data);
+        //onsole.log(data);
 
         fs.writeFile('Server/DT_Mail.json',JSON.stringify(data),(err)=>{
             if(err) console.log('Error');
