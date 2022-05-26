@@ -250,6 +250,19 @@ width: 999px;
     float: right;
 }
 
+#User_Name{
+    float: left;
+    border-radius: 6%;
+    width: auto;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 18px;
+
+}
 .settings input[type="button"] {
     border-radius: 10%;
     width: 80px;

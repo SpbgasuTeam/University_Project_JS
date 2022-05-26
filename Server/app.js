@@ -3,11 +3,11 @@ import express from 'express'
 import cors from 'cors';
 import {v4 as uuidv4} from 'uuid';
 import * as fs from "fs";
+
 const app = express();
 app.use(cors());
 
-function Add_json_DT(New_Json){
-
+function Add_User(New_Json){
     var Data_B = fs.readFileSync('Server/DT_users.json','utf8');
     var Buf=JSON.parse(Data_B);
     //console.log(Buf)
@@ -29,6 +29,7 @@ function Create_Dialog(Users){
         if(err) console.log('Error');
     });
 }
+
 app.post("/Register", (req, res) => {
     req.on('data', requestBody => {
         const body = JSON.parse(requestBody.toString());
@@ -44,7 +45,7 @@ app.post("/Register", (req, res) => {
             res.send(JSON.stringify("Bad_ID"))
         } else {
             //console.log(body);
-            Add_json_DT(body);
+            Add_User(body);
             res.send(JSON.stringify("Reg_ok"));
         }
     })
@@ -208,4 +209,5 @@ app.post("/Get_list_users", (req, res) => {
         res.send(buf);
     })
 })
+
 app.listen(80)

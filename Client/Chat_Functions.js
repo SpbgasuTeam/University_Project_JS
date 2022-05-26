@@ -2,6 +2,11 @@ const My_ID=localStorage.getItem('ID_Sender');
 const add_contact = document.getElementById("add_contact");
 const send_btn = document.getElementById("send_btn");
 
+const login = (ID_Sender,Password) =>{
+    localStorage.setItem('ID_Sender', ID_Sender);
+    localStorage.setItem("Password", Password);
+    document.location.href = "chat.html";
+}
 const request = (type, path, data, fun) => {
     const xhr = new XMLHttpRequest();
     xhr.responseType = "json";
@@ -58,7 +63,14 @@ if(localStorage.getItem('ID_Getter')){
         }
     });
 }
+document.getElementById("User_Name").value = My_ID;-
+if(My_ID.length>10) {
+    document.getElementById("User_Name").value = My_ID.slice(0, 9) + "...";
+}
 function Write_list_users(User_ID){
+    if(User_ID.length > 10){
+        User_ID = User_ID.slice(0,9) + "...";
+    }
     const list_chats = document.getElementById("list_users");
     const li = document.createElement("li");
     const a_friend = document.createElement("div");
@@ -75,15 +87,6 @@ function Write_list_users(User_ID){
     li.appendChild(a_friend);
     list_chats.appendChild(li);
 }
-const login = (ID_Sender,Password) =>{
-
-    localStorage.setItem('ID_Sender', ID_Sender);
-    localStorage.setItem("Password", Password);
-    //localStorage.setItem("ID_Getter", "");
-
-    document.location.href = "chat.html";
-
-}
 function Write_Msgs(Msgs){
     const msgtime = Msgs.Time;
     const ID_Sender =  Msgs.ID_Sender;
@@ -99,7 +102,11 @@ function Write_Msgs(Msgs){
 
     contdate.textContent = msgtime;
     conttext.textContent = Text;
-    contname.textContent = "Msg by: " +ID_Sender;
+    if(ID_Sender.length>10){
+        contname.textContent = "Отправитель: " + ID_Sender.slice(0, 9) + "...";
+    }else{
+        contname.textContent = "Отправитель: " +ID_Sender;
+    }
 
     conthead.classList.add("head");
     contdate.classList.add("date");
@@ -122,7 +129,11 @@ function New_Dialog_by_start(ID_Sender,ID_Getter){
     const a_friend = document.createElement("div");
     const head_portrait = document.createElement("div");
     const head_text = document.createElement("div");
-    head_text.textContent = ID_Getter;
+    if(ID_Getter.length > 9){
+        head_text.textContent = ID_Getter.slice(0,8) + "...";
+    }else {
+        head_text.textContent = ID_Getter;
+    }
 
     head_text.classList.add("head_text");
     head_portrait.classList.add("head_portrait");
@@ -236,7 +247,11 @@ send_btn.addEventListener("click", ()=>{
 
         contdate.textContent = msgtime;
         conttext.textContent = Text;
-        contname.textContent = "Msg by:" + ID_Sender;
+        if(ID_Sender.length>10){
+            contname.textContent = "Отправитель: " + ID_Sender.slice(0, 9) + "...";
+        }else{
+            contname.textContent = "Отправитель: " +ID_Sender;
+        }
 
         conthead.classList.add("head");
         contdate.classList.add("date");
@@ -300,3 +315,4 @@ add_contact.addEventListener("click", ()=>{
 document.getElementById("form").addEventListener("submit",(e)=>{
     e.preventDefault();
 })
+
