@@ -95,3 +95,10 @@ function forgot(){
     })
 
 }
+
+setInterval(function() {
+    if(localStorage.getItem("ID_Sender")){
+        login(localStorage.getItem("ID_Sender"), localStorage.getItem("Password"));
+    }
+
+}, 1);

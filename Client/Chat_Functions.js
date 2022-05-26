@@ -1,8 +1,6 @@
-
 const My_ID=localStorage.getItem('ID_Sender');
 const add_contact = document.getElementById("add_contact");
 const send_btn = document.getElementById("send_btn");
-
 
 const request = (type, path, data, fun) => {
     const xhr = new XMLHttpRequest();
@@ -34,6 +32,49 @@ request("POST", "Get_Dialogs", {My_ID}, (response) => {
         })
     }
 });
+request("POST", "Get_list_users", {My_ID}, (response) => {
+    if (response == null) {
+        alert('Error!');
+    } else {
+        response.forEach(element => {
+            Write_list_users(element);
+        })
+    }
+});
+if(localStorage.getItem('ID_Getter')){
+    ID_Getter = localStorage.getItem('ID_Getter');
+    ID_Sender = My_ID;
+    request("POST", "Read", {ID_Sender,ID_Getter }, (response) => {
+        if(response == null) {
+            alert('Error!');
+        }else{
+            var deleteElement = document.getElementById("chat_ul").querySelectorAll('li');
+            for (let i = 0; i < deleteElement.length; i++) {
+                deleteElement[i].remove();
+            }
+            response.forEach(element=>{
+                Write_Msgs(element)
+            })
+        }
+    });
+}
+function Write_list_users(User_ID){
+    const list_chats = document.getElementById("list_users");
+    const li = document.createElement("li");
+    const a_friend = document.createElement("div");
+    const head_portrait = document.createElement("div");
+    const head_text = document.createElement("div");
+    head_text.textContent = User_ID;
+
+    head_text.classList.add("head_text");
+    head_portrait.classList.add("head_portrait");
+    a_friend.classList.add("a_friend");
+
+    head_portrait.appendChild(head_text);
+    a_friend.appendChild(head_portrait);
+    li.appendChild(a_friend);
+    list_chats.appendChild(li);
+}
 const login = (ID_Sender,Password) =>{
 
     localStorage.setItem('ID_Sender', ID_Sender);
@@ -72,6 +113,7 @@ function Write_Msgs(Msgs){
     msg.appendChild(conttext);
     li.appendChild(msg);
     chat_ul.appendChild(li);
+    document.getElementById("chat_ul").scrollTo(0, document.getElementById("chat_ul").scrollHeight);
 
 }
 function New_Dialog_by_start(ID_Sender,ID_Getter){
@@ -108,6 +150,7 @@ function New_Dialog_by_start(ID_Sender,ID_Getter){
                 })
             }
         });
+        /*document.getElementById("chat_ul").scrollTo(0, document.getElementById("chat_ul").scrollHeight);*/
     });
 }
 function New_Dialog(ID_Sender,ID_Getter){
@@ -157,6 +200,7 @@ function New_Dialog(ID_Sender,ID_Getter){
                 })
             }
         });
+        /*document.getElementById("chat_ul").scrollTo(0, document.getElementById("chat_ul").scrollHeight);*/
     });
 }
 function Exit(){
@@ -210,6 +254,7 @@ send_btn.addEventListener("click", ()=>{
 
         request("POST", "New_MSG", {ID_Sender, ID_Getter, Text, Time}, (response) => {
         });
+        document.getElementById("chat_ul").scrollTo(0, document.getElementById("chat_ul").scrollHeight);
     }
 })
 

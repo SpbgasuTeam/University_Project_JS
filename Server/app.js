@@ -190,7 +190,21 @@ app.post("/Get_Dialogs", (req, res) => {
                 buf.push({"ID_Sender":element.ID[1],"ID_Getter":element.ID[0]})
             }
         })
-        buf.delete
+        buf.delete;
+        res.send(buf);
+    })
+})
+app.post("/Get_list_users", (req, res) => {
+    req.on('data', requestBody => {
+        //const body = JSON.parse(requestBody.toString());
+        const data = JSON.parse(fs.readFileSync("Server/DT_users.json", "utf-8"));
+
+        let buf=[];
+        data.forEach(element => {
+            buf.push(element.ID);
+
+        })
+        //buf.delete
         res.send(buf);
     })
 })
