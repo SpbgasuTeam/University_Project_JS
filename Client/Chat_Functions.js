@@ -228,14 +228,13 @@ document.addEventListener( 'keydown', event => {
 
 send_btn.addEventListener("click", ()=>{
 
-    if(document.getElementById("send_txt").value && localStorage.getItem('ID_Getter')) {
+    if(document.getElementById("send_txt").value.replace(/\s+/g, ' ').trim() && localStorage.getItem('ID_Getter')) {
         const date = new Date();
         const msgtime = date.getHours().toString() + ":" + date.getMinutes().toString() + " " + date.getDate().toString() + "." + date.getMonth().toString() + "." +  date.getFullYear().toString();
         const ID_Sender = localStorage.getItem('ID_Sender');
         const ID_Getter = localStorage.getItem('ID_Getter');
 
         const Text = document.getElementById("send_txt").value;
-        document.getElementById("send_txt").value = "";
 
         const chat_ul = document.getElementById("chat_ul");
         const li = document.createElement("li");
@@ -271,6 +270,7 @@ send_btn.addEventListener("click", ()=>{
         });
         document.getElementById("chat_ul").scrollTo(0, document.getElementById("chat_ul").scrollHeight);
     }
+    document.getElementById("send_txt").value = "";
 })
 
 add_contact.addEventListener("click", ()=>{
@@ -316,4 +316,11 @@ add_contact.addEventListener("click", ()=>{
 document.getElementById("form").addEventListener("submit",(e)=>{
     e.preventDefault();
 })
+
+setInterval(function() {
+    if(!localStorage.getItem("ID_Sender")){
+        Exit();
+    }
+
+}, 1);
 

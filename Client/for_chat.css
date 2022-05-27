@@ -300,11 +300,12 @@ width: 999px;
 
 .search_online_add {
     border-radius: 10%;
-    width: 150px;
-    height: 30px;
+    width: 145px;
+    height: 25px;
     background-color: white;
     border: 1px solid black;
     margin: 5px;
+    padding: 5px;
 }
 
 
