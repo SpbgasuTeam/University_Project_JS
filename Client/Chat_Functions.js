@@ -63,7 +63,7 @@ if(localStorage.getItem('ID_Getter')){
         }
     });
 }
-document.getElementById("User_Name").value = My_ID;-
+document.getElementById("User_Name").value = My_ID;
 if(My_ID.length>10) {
     document.getElementById("User_Name").value = My_ID.slice(0, 9) + "...";
 }
@@ -287,6 +287,7 @@ add_contact.addEventListener("click", ()=>{
         btn.classList.add("search_online_add");
         main_list_chats.appendChild(str);
         main_list_chats.appendChild(btn);
+        document.getElementById("main_list_chats").scrollTo(0, document.getElementById("main_list_chats").scrollHeight);
 
         btn.addEventListener("click", () => {
             const ID_Getter = str.value;
