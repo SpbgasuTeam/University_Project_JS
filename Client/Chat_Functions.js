@@ -2,6 +2,12 @@ const My_ID=localStorage.getItem('ID_Sender');
 const add_contact = document.getElementById("add_contact");
 const send_btn = document.getElementById("send_btn");
 
+setInterval(function() {
+    if(!localStorage.getItem("ID_Sender")){
+        Exit();
+    }
+}, 1);
+
 const login = (ID_Sender,Password) =>{
     localStorage.setItem('ID_Sender', ID_Sender);
     localStorage.setItem("Password", Password);
@@ -317,10 +323,4 @@ document.getElementById("form").addEventListener("submit",(e)=>{
     e.preventDefault();
 })
 
-setInterval(function() {
-    if(!localStorage.getItem("ID_Sender")){
-        Exit();
-    }
-
-}, 1);
 
