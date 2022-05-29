@@ -8,12 +8,12 @@ setInterval(function() {
     }
 }, 1);
 
-const login = (ID_Sender,Password) =>{
+function login(ID_Sender,Password){
     localStorage.setItem('ID_Sender', ID_Sender);
     localStorage.setItem("Password", Password);
     document.location.href = "chat.html";
 }
-const request = (type, path, data, fun) => {
+function request(type, path, data, fun){
     const xhr = new XMLHttpRequest();
     xhr.responseType = "json";
 
@@ -33,6 +33,7 @@ const request = (type, path, data, fun) => {
     };
     xhr.send(JSON.stringify(data));
 }
+
 request("POST", "Get_Dialogs", {My_ID}, (response) => {
     if (response == null) {
         alert('Error!');
@@ -52,6 +53,7 @@ request("POST", "Get_list_users", {My_ID}, (response) => {
         })
     }
 });
+
 if(localStorage.getItem('ID_Getter')){
     ID_Getter = localStorage.getItem('ID_Getter');
     ID_Sender = My_ID;
@@ -73,6 +75,7 @@ document.getElementById("User_Name").value = My_ID;
 if(My_ID.length>10) {
     document.getElementById("User_Name").value = My_ID.slice(0, 9) + "...";
 }
+
 function Write_list_users(User_ID){
     if(User_ID.length > 10){
         User_ID = User_ID.slice(0,9) + "...";
@@ -231,7 +234,6 @@ document.addEventListener( 'keydown', event => {
         event.preventDefault();
         }
 });
-
 send_btn.addEventListener("click", ()=>{
 
     if(document.getElementById("send_txt").value.replace(/\s+/g, ' ').trim() && localStorage.getItem('ID_Getter')) {
@@ -278,7 +280,6 @@ send_btn.addEventListener("click", ()=>{
     }
     document.getElementById("send_txt").value = "";
 })
-
 add_contact.addEventListener("click", ()=>{
     if(!document.getElementById("add_btn_id")) {
         const main_list_chats = document.getElementById("main_list_chats");
@@ -318,7 +319,6 @@ add_contact.addEventListener("click", ()=>{
         });
     }
 })
-
 document.getElementById("form").addEventListener("submit",(e)=>{
     e.preventDefault();
 })
